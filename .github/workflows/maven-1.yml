@@ -17,10 +17,10 @@ jobs:
         java-version: 1.11
     - name: Build with Maven
       run: mvn clean install
-    - name: Publish to Docker Hub
-      uses: docker/build-push-action@v1
+    - uses: mr-smithers-excellent/docker-build-push@v3
       with:
-       username: ${{ secrets.DOCKER_HUB_USERNAME }}
-       password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-       repository: omkarpatel00/demo-docker
-       tags: ${{github.run_number}}
+        image: omkarpatel00/op
+        registry: docker.pkg.github.com
+        githubOrg: override-org # optional
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }} 
